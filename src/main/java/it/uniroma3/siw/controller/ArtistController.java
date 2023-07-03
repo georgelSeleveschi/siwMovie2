@@ -23,6 +23,16 @@ public class ArtistController {
 	@Autowired 
 	private ArtistRepository artistRepository;
 
+	@GetMapping(value="/utenteNonRegistrato/artists")
+	public String getArtistsNonRegistrato(Model model) {
+		model.addAttribute("artists", this.artistRepository.findAll());
+		return "utenteNonRegistrato/artists.html";
+	}
+	@GetMapping(value="/utenteNonRegistrato/artist/{id}")
+	public String getArtistNonRegistrato(@PathVariable("id") Long id, Model model) {
+		model.addAttribute("artist", this.artistRepository.findById(id).get());
+		return "utenteNonRegistrato/artist.html";
+	}
 	@GetMapping(value="/admin/formNewArtist")
 	public String formNewArtist(Model model) {
 		model.addAttribute("artist", new Artist());

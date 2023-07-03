@@ -52,6 +52,12 @@ public class MovieController {
     	model.addAttribute("movies", this.movieRepository.findAll());
     	return "utenteNonRegistrato/movies.html";
     }
+    @GetMapping("utenteNonRegistrato/movie/{id}")
+	public String getMovieNonRegistrato(@PathVariable("id") Long id, Model model) {
+		Movie film=this.movieRepository.findById(id).get();
+		model.addAttribute("movie", film);
+		return "/utenteNonRegistrato/movie.html";
+	}
 	@GetMapping(value="/admin/formNewMovie")
 	public String formNewMovie(Model model) {
 		model.addAttribute("movie", new Movie());
