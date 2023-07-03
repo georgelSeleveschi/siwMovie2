@@ -46,7 +46,12 @@ public class MovieController {
 	
 	@Autowired 
 	private CredentialsService credentialsService;
-
+	
+    @GetMapping(value="/utenteNonRegistrato/movies")
+    public String elencofilm(Model model) {
+    	model.addAttribute("movies", this.movieRepository.findAll());
+    	return "utenteNonRegistrato/movies.html";
+    }
 	@GetMapping(value="/admin/formNewMovie")
 	public String formNewMovie(Model model) {
 		model.addAttribute("movie", new Movie());

@@ -10,6 +10,7 @@
 
 <body>
 	<header>
+		<header>
 		<div th:if="${#request.userPrincipal}">
 			<span th:text="${#request.userPrincipal.principal.username}"></span>
 			<a href="/logout">Logout</a>
@@ -17,11 +18,11 @@
 		<div th:unless="${#request.userPrincipal}">
 			<a href="/login">Login</a>
 		</div>
+		<img src="/images/logo-siw.png" width="30%" />
 	</header>
 
-	<div>
-		<a href="/"><img src="/images/logo-siw.png" width="50%" /></a>
-	</div>
+
+	
 	<h1>Registrazione nuovo utente</h1>
 	<form th:action="@{/register}" method="POST">
 		<div>

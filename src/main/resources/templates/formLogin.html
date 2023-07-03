@@ -17,11 +17,11 @@
 		<div th:unless="${#request.userPrincipal}">
 			<a href="/login">Login</a>
 		</div>
+		<img src="/images/logo-siw.png" width="30%" />
 	</header>
 
-	<div>
-		<a href="/"><img src="/images/logo-siw.png" width="50%"/></a>
-	</div>
+
+	
 	<h1>Login</h1>
 	<form th:action="@{/login}" method="POST">
 			<div>
