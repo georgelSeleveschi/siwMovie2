@@ -28,14 +28,10 @@
 	<div>
 		<a href="/artist">Elenco Artisti</a>
 	</div>
+	<div>
+		<a th:href=@{'/recensioni/'+${#request.userPrincipal.principal.username}}>Elenco Recensioni scritte </a>
+	</div>
 	
-	<h1>Consulta l'archivio (utente non registrato)</h1>
-	<div>
-		<a href="/utenteNonRegistrato/movies">Elenco Film</a>
-	</div>
-	<div>
-		<a href="/utenteNonRegistrato/artists">Elenco Artisti</a>
-	</div>
 </body>
 
 </html>

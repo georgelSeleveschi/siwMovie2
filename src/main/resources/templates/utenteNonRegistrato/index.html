@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html>
 
 <head>
@@ -17,24 +17,24 @@
 		<div th:unless="${#request.userPrincipal}">
 			<a href="/login">Login</a>
 		</div>
-		<a href="/"><img src="/images/logo-siw.png" width="30%" /></a>
+		<a href="/"><img src="/images/logo-siw.png" width="30%"/></a>
 	</header>
-
 
 	
 	<h1>Consulta l'archivio</h1>
 	<div>
-		<a href="/admin/movie">Elenco Film</a>
+		<a href="/movie">Elenco Film</a>
 	</div>
 	<div>
 		<a href="/artist">Elenco Artisti</a>
 	</div>
-	<h1>Operazioni per amministratore</h1>
+	
+	<h1>Consulta l'archivio (utente non registrato)</h1>
 	<div>
-		<a href="/admin/indexMovie">Operazioni sui film</a>
+		<a href="/utenteNonRegistrato/movies">Elenco Film</a>
 	</div>
 	<div>
-		<a href="/admin/indexArtist">Operazioni sugli artisti</a>
+		<a href="/utenteNonRegistrato/artists">Elenco Artisti</a>
 	</div>
 </body>
 

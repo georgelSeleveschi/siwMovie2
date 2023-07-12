@@ -102,25 +102,21 @@ public class MovieController {
 	}
 
 	@PostMapping("/admin/movie")
-	public String newMovie(@Valid @ModelAttribute("movie") Movie movie, BindingResult bindingResult, Model model,@RequestParam("image")MultipartFile file) throws IOException{
+	public String newMovie(@Valid @ModelAttribute("movie") Movie movie, BindingResult bindingResult, Model model) throws IOException{
 		
 		this.movieValidator.validate(movie, bindingResult);
 		if (!bindingResult.hasErrors()) {
-			if (file.getContentType().equals("image/jpeg")) {
 				
-				File pathdest= new File(absolutepath,file.getOriginalFilename());
+				File pathdest= new File(absolutepath,movie.getFile().getOriginalFilename());
 				 pathdest.createNewFile();
 				 System.out.println(absolutepath);
-			     Files.copy(file.getInputStream(),pathdest.toPath(),StandardCopyOption.REPLACE_EXISTING);
+			     Files.copy(movie.getFile().getInputStream(),pathdest.toPath(),StandardCopyOption.REPLACE_EXISTING);
 			
-		    movie.setUrlImage("/images/"+file.getOriginalFilename());
+		    movie.setUrlImage("/images/"+movie.getFile().getOriginalFilename());
 			this.movieRepository.save(movie); 
 			model.addAttribute("movie", movie);
 			return "/admin/ConfermaFilm.html";
-			}
-			else {
-				return "admin/formNewMovie.html";
-			}
+			
 		} else {
 			return "admin/formNewMovie.html"; 
 		}

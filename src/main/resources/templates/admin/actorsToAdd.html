@@ -15,8 +15,9 @@
 		<div th:unless="${#request.userPrincipal}">
 			<a href="/login">Login</a>
 		</div>
+		<a href="/"><img src="/images/logo-siw.png" width="30%" /></a>
 	</header>
-	<div><a href="/"><img src="/images/logo-siw.png" width="50%"/></a></div>
+	
 	<h1 th:text="'Attori del film ' + ${movie.title}"></h1>
 	<div th:if="${movie.actors.isEmpty()}">Non ci sono attori per questo film</div>
 	<ul>

@@ -24,14 +24,15 @@
 	
 	<h1>Aggiungi una recensione</h1>
 	<form th:action="@{'/recensione' + '/' + ${idmovie} + '/' + ${user}}" method="POST" th:object="${recensione}">
-		<div>
-			<span th:text="${messaggioErrore}">Errore</span>
-		</div>
+			<div th:if="${#fields.hasGlobalErrors()}">
+  			<p th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</p> 
+  		</div>
+
 		<div>
 			<label>Titolo :</label><span ><input required type="text" th:field="${recensione.titolo}" autocomplete="off"> </span>
 		</div>
 		<div>
-			<label>Recensione:</label> <span><input required type="text" th:field="${recensione.testo}" autocomplete="off" /></span>
+			<label>Recensione:</label> <span><input required class="recensione" type="text" th:field="${recensione.testo}" autocomplete="off" /></span>
 		</div>
 		
         <fieldset>

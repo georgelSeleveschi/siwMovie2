@@ -14,7 +14,7 @@
 		<div th:unless="${#request.userPrincipal}">
 			<a href="/login">Login</a>
 		</div>
-		<img src="/images/logo-siw.png" width="30%" />
+		<a href="/"><img src="/images/logo-siw.png" width="30%" /></a>
 	</header>
 
 
@@ -23,9 +23,9 @@
     <div th:if="${movie}">
         <span th:text="${movie.title}">Up!</span>
         <span th:text="'(' + ${movie.year} + ')'">2000</span>
-        <span><img width="5%" th:src=${movie.urlImage} /></span>
+        <span><img width="30%" th:src=${movie.urlImage} /></span>
         
-    
+</div>
 	  <h1>Recensioni</h1>
 	<div th:if="${recensioni.isEmpty()}">Non ci sono recensioni per questo film nel sistema</div>
 	<ul>

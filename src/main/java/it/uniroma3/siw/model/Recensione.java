@@ -1,20 +1,29 @@
 package it.uniroma3.siw.model;
 import java.util.*;
 import javax.persistence.*;
+import javax.persistence.NamedQuery;
+
+
 
 @Entity
 public class Recensione {
+	
+	
 	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 	
 	private String titolo;
 	private int Valutazione;
+	
+	@Column(length=200)
 	private String Testo;
+	
 	@ManyToOne
 	private User utente;
 	@ManyToOne
 	private Movie film;
+	
 	
 	public User getUtente() {
 		return utente;

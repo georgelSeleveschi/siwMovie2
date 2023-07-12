@@ -17,7 +17,7 @@
 		<div th:unless="${#request.userPrincipal}">
 			<a href="/login">Login</a>
 		</div>
-		<img src="/images/logo-siw.png" width="30%" />
+		<a href="/"><img src="/images/logo-siw.png" width="30%" /></a>
 	</header>
 
 	
@@ -41,7 +41,7 @@
 		</div>
 
 		<div>
-			<label for="urlImmagine">URL immagine:</label> <span><input type="file" name="image" /></span>
+			<label for="urlImmagine">URL immagine:</label> <span><input th:field="${movie.file}" type="file" name="image" /></span>
 		</div>
 		
 		<div>
