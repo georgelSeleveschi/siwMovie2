@@ -56,7 +56,7 @@ public class MovieController {
 	public String getMovieNonRegistrato(@PathVariable("id") Long id, Model model) {
 		Movie film=this.movieRepository.findById(id).get();
 		model.addAttribute("movie", film);
-		return "/utenteNonRegistrato/movie.html";
+		return "utenteNonRegistrato/movie.html";
 	}
 	@GetMapping(value="/admin/formNewMovie")
 	public String formNewMovie(Model model) {
@@ -115,7 +115,7 @@ public class MovieController {
 		    movie.setUrlImage("/images/"+movie.getFile().getOriginalFilename());
 			this.movieRepository.save(movie); 
 			model.addAttribute("movie", movie);
-			return "/admin/ConfermaFilm.html";
+			return "admin/ConfermaFilm.html";
 			
 		} else {
 			return "admin/formNewMovie.html"; 
@@ -135,7 +135,7 @@ public class MovieController {
 		Movie film=this.movieRepository.findById(id).get();
 		model.addAttribute("movie", film);
 		model.addAttribute("recensioni",film.getRecensioni());
-		return "/admin/movie.html";
+		return "admin/movie.html";
 	}
 	@GetMapping("/admin/movie")
 	public String getMovieadmin(Model model) {
@@ -145,7 +145,7 @@ public class MovieController {
 
 		model.addAttribute("movies", this.movieRepository.findAll());
 		model.addAttribute("user", credentials.getUser());
-		return "/admin/movies.html";
+		return "admin/movies.html";
 	}
 
 	@GetMapping("/movie")
