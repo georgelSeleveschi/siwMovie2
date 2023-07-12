@@ -15,5 +15,6 @@ public interface RecensioneRepository extends CrudRepository<Recensione, Long> {
 	
 	@Query("SELECT r FROM Recensione r WHERE r.utente=?1")
 	List<Recensione> findAllByUtente(User u);
-	
+	@Query("SELECT r FROM Recensione r WHERE r.film=?1 ORDER BY r.Valutazione DESC" )
+	List<Recensione> orderRecensione(Movie mov);
 }

@@ -8,19 +8,22 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import it.uniroma3.siw.controller.validator.AuthenticationValidator;
 import it.uniroma3.siw.model.Credentials;
 import it.uniroma3.siw.model.User;
 import it.uniroma3.siw.service.CredentialsService;
 
 @Controller
 public class AuthenticationController {
-	
+	@Autowired 
+	private AuthenticationValidator authenticationValidator;
 	@Autowired
 	private CredentialsService credentialsService;
 	
@@ -62,22 +65,25 @@ public class AuthenticationController {
         }
         return "index.html";
     }
-
+    @Transactional
 	@PostMapping(value = { "/register" })
     public String registerUser(@Valid @ModelAttribute("user") User user,
                  BindingResult userBindingResult, @Valid
                  @ModelAttribute("credentials") Credentials credentials,
                  BindingResult credentialsBindingResult,
                  Model model) {
-
+		this.authenticationValidator.validate(credentials, credentialsBindingResult);
         // se user e credential hanno entrambi contenuti validi, memorizza User e the Credentials nel DB
-        if(!userBindingResult.hasErrors() && ! credentialsBindingResult.hasErrors()) {
+        if(!credentialsBindingResult.hasErrors()) {
             credentials.setUser(user);
          
             credentialsService.saveCredentials(credentials);
             model.addAttribute("user", user);
             return "registrationSuccessful";
         }
-        return "registerUser";
+        else {
+        	
+        return "UserGiaUsato.html";
+        }
     }
 }

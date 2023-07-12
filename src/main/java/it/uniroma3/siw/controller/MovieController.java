@@ -30,6 +30,7 @@ import it.uniroma3.siw.model.Movie;
 import it.uniroma3.siw.model.Recensione;
 import it.uniroma3.siw.repository.ArtistRepository;
 import it.uniroma3.siw.repository.MovieRepository;
+import it.uniroma3.siw.repository.RecensioneRepository;
 import it.uniroma3.siw.service.CredentialsService;
 
 @Controller
@@ -37,7 +38,8 @@ public class MovieController {
 	private String absolutepath="D:/Documents/siw/siw-movie-03.zip_expanded/siw-movie-03/src/main/resources/static/images/";
 	@Autowired 
 	private MovieRepository movieRepository;
-	
+	@Autowired 
+	private RecensioneRepository recensioneRepository;
 	@Autowired 
 	private ArtistRepository artistRepository;
 
@@ -52,10 +54,11 @@ public class MovieController {
     	model.addAttribute("movies", this.movieRepository.findAll());
     	return "utenteNonRegistrato/movies.html";
     }
-    @GetMapping("utenteNonRegistrato/movie/{id}")
+    @GetMapping("/utenteNonRegistrato/movie/{id}")
 	public String getMovieNonRegistrato(@PathVariable("id") Long id, Model model) {
-		Movie film=this.movieRepository.findById(id).get();
+    	Movie film=this.movieRepository.findById(id).get();
 		model.addAttribute("movie", film);
+		model.addAttribute("recensioni",film.getRecensioni());
 		return "utenteNonRegistrato/movie.html";
 	}
 	@GetMapping(value="/admin/formNewMovie")
@@ -127,7 +130,7 @@ public class MovieController {
 	public String getMovie(@PathVariable("id") Long id, Model model) {
 		Movie film=this.movieRepository.findById(id).get();
 		model.addAttribute("movie", film);
-		model.addAttribute("recensioni",film.getRecensioni());
+		model.addAttribute("recensioni",this.recensioneRepository.orderRecensione(film));
 		return "movie.html";
 	}
 	@GetMapping("/admin/movie/{id}")

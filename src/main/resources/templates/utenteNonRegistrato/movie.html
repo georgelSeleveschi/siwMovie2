@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html>
-
-<head>
-	<title>Film</title>
+  <head>
+    <title>Film</title>
 	<link rel="stylesheet" href="/css/stile.css" />
 </head>
 
@@ -11,12 +10,24 @@
 		
 		<a href="/"><img src="/images/logo-siw.png" width="30%"/></a>
 	</header>
-	<h1>Dettagli Film</h1>
+
+
+	
+    <h1>Dettagli Film</h1>
     <div th:if="${movie}">
         <span th:text="${movie.title}">Up!</span>
         <span th:text="'(' + ${movie.year} + ')'">2000</span>
         <span><img width="30%" th:src=${movie.urlImage} /></span>
-    </div>
-</body>
-
+	  <h1>Recensioni</h1>
+	<div th:if="${recensioni.isEmpty()}">Non ci sono recensioni per questo film nel sistema</div>
+	<ul>
+		<li th:each="recensione : ${recensioni}">
+			<div><span th:text="'Recensione scritta da '+${recensione.utente.getName()}+' : '">Recensione</span></div>
+			<div><span th:text="${recensione.titolo}"></span></div>
+			<span th:text="${recensione.Testo} + ' (stelle:' + ${recensione.Valutazione} + ')'">Up! (2000)</span>
+		</li>
+	</ul>
+  </div>
+    <div th:unless="${movie}">Non esiste</div>
+  </body>
 </html>
